@@ -1,8 +1,9 @@
-import React, {useRef} from 'react'
+import React, {useRef, Suspense} from 'react'
 import {Canvas} from 'react-three-fiber'
 import {OrbitControls} from 'drei'
 
 import Box from './Box'
+import Ibex from './Ibex'
 
 function App() {
     const mouse = useRef({x: 0, y: 0}) // Tracks users mouse (0, 0 = middle of page)
@@ -11,16 +12,12 @@ function App() {
     window.addEventListener('mousemove', (e) => {
         mouse.current.y = (e.clientY / window.innerHeight) * 2 - 1
         mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1
-
-        console.log(mouse.current)
     })
 
     window.addEventListener('scroll', () => {
         var scroll = window.pageYOffset / window.innerHeight
         scrollRig.current.section = Math.floor(scroll)
         scrollRig.current.amount = scroll - Math.floor(scroll)
-
-        console.log(scrollRig.current)
     })
 
     const Scene = () => {
@@ -30,6 +27,9 @@ function App() {
                 <pointLight position={[10, 10, 10]} />
 
                 <Box mouse={mouse} />
+                <Suspense fallback={null}>
+                    <Ibex scale={[2.5, 2.5, 2.5]} />
+                </Suspense>
                 <OrbitControls />
             </>
         )
