@@ -1,0 +1,38 @@
+React - Webpack - Webflow Configuration
+
+    1.  Add div with id="app" to Webflow page    
+
+    2.  a)  For quick development testing from the build folder: 
+            set up live server on a local port (click go live at bottom of vscode)
+            paste the following before </body> tag on webflow page (change link to the local server)
+                <script type="text/javascript" src="http://127.0.0.1:5500/build/bundle.js" charset="utf-8"></script>
+
+    2.  b)  For production launch in Webflow:
+            convert bundle.js to bundle.txt
+            upload .txt file to project media
+            copy link of the media upload
+            use this link instead of the local server
+
+    3.  Add the following styles:
+            <style>
+                * {
+                    box-sizing: border-box;
+                }
+                
+                body {
+                    background: #c3ced0;
+                    margin: 0;
+                    padding: 0;
+                }
+
+                .canvas-container {
+                    width: 100%;
+                    height: 100vh;
+                }
+            </style>
+
+
+Other things:
+
+    The react application can only access window events, not canvas events. In order to do both you need to use Drei's html elements which doesn't keep html stuff to Webflow
+    This means that scrolling and mouse events can still add interactivity to the canvas scene though!
